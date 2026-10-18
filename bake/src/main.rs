@@ -2,7 +2,7 @@
 // Copyright, 2026, by Samuel Williams.
 
 use bake_markdown as _;
-use socketry_project as _;
+use core_project as _;
 
 #[cfg(not(test))]
 fn main() -> bake::Result<()> {

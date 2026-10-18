@@ -1,7 +1,7 @@
 // Released under the MIT License.
 // Copyright, 2026, by Samuel Williams.
 
-use socketry_markdown::ParseOptions;
+use core_markdown::ParseOptions;
 
 use super::{normalize_document, normalize_document_with_options};
 

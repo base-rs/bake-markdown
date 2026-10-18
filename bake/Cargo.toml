@@ -5,6 +5,6 @@ edition = "2024"
 publish = false
 
 [dependencies]
-bake = "0.19"
+bake = "0.20"
 bake-markdown = { path = ".." }
-socketry-project = ">=0.3.9"
+core-project = ">=0.1.0"
