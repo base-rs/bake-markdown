@@ -1,5 +1,9 @@
 # Releases
 
+## v0.4.0
+
+- Use `core-markdown` in place of `socketry-markdown`. Parser options and errors in the public API now use `core_markdown` types.
+
 ## v0.3.2
 
 - Document the shared release process.

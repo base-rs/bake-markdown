@@ -162,7 +162,7 @@ fn returns_a_contextual_error_when_markdown_cannot_be_parsed() {
         PathBuf::from("project/document.mdx"),
         "<Open></Different>".to_owned(),
     );
-    let options = socketry_markdown::ParseOptions::mdx();
+    let options = core_markdown::ParseOptions::mdx();
 
     let error = normalize_files_with(
         &mut file_system,
