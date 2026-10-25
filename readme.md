@@ -4,7 +4,7 @@ Markdown normalization for Bake projects. It joins soft source line breaks in Ma
 
 ## Motivation
 
-Hard-wrapped paragraphs are difficult to edit consistently. This crate uses the `core-markdown` syntax tree and serializer so normalization follows Markdown structure instead of changing lines with regular expressions.
+Hard-wrapped paragraphs are difficult to edit consistently. This crate uses the `base-markdown` syntax tree and serializer so normalization follows Markdown structure instead of changing lines with regular expressions.
 
 ## Usage
 
@@ -26,13 +26,16 @@ Rust callers can use `bake_markdown::normalize_document` directly.
 
 ## Releasing
 
-Prepare a release with `cargo bake cargo:version:patch` (or `minor`, `major`, or `bump --version X.Y.Z`), commit with a `Release: vVERSION` trailer, then run `cargo bake cargo:release` and open a pull request. After review and merge, GitHub Actions publishes the release when the configured `crates-io` environment approves it. Follow the shared [Releasing skill](https://github.com/core-rs/core-project/blob/main/context/releasing.md) for the standard process.
+Prepare a release with `cargo bake cargo:version:patch` (or `minor`, `major`, or `bump --version X.Y.Z`), commit with a `Release: vVERSION` trailer, then run `cargo bake cargo:release` and open a pull request. After review and merge, GitHub Actions publishes the release when the configured `crates-io` environment approves it. Follow the shared [Releasing skill](https://github.com/base-rs/base-project/blob/main/context/releasing.md) for the standard process.
 
 ## Releases
 
 <!-- bake-readme:releases:start -->
-
 See [releases.md](releases.md) for the full release history.
+
+### v0.6.0
+
+- Depend on `base-markdown` under the `base-rs` organization, replacing `core-markdown`. Callers passing explicit `ParseOptions` or naming parser errors must use the corresponding types from `base-markdown`.
 
 ### v0.5.0
 
@@ -41,20 +44,15 @@ See [releases.md](releases.md) for the full release history.
 ### v0.4.0
 
 - Use `core-markdown` in place of `socketry-markdown`. Parser options and errors in the public API now use `core_markdown` types.
-
-### v0.3.2
-
-- Document the shared release process.
-
 <!-- bake-readme:releases:end -->
 
 ## See Also
 
-[`core-markdown`](https://github.com/core-rs/core-markdown) provides the parser and serializer used by this crate.
+[`base-markdown`](https://github.com/base-rs/base-markdown) provides the parser and serializer used by this crate.
 
 ## Contributing
 
-Please open an issue or pull request on [GitHub](https://github.com/core-rs/bake-markdown).
+Please open an issue or pull request on [GitHub](https://github.com/base-rs/bake-markdown).
 
 ### Agent Context
 

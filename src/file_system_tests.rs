@@ -168,7 +168,7 @@ fn returns_a_contextual_error_when_markdown_cannot_be_serialized() {
         Path::new("project"),
         &[PathBuf::from("document.md")],
         |_| {
-            Err(core_markdown::message::Message {
+            Err(base_markdown::message::Message {
                 reason: "cannot serialize".into(),
                 rule_id: "test-error",
                 source: "bake-markdown",

@@ -1,7 +1,7 @@
 // Released under the MIT License.
 // Copyright, 2026, by Samuel Williams.
 
-use core_markdown::ParseOptions;
+use base_markdown::ParseOptions;
 
 use super::{normalize_document, normalize_document_with_options};
 
@@ -94,11 +94,11 @@ fn honors_independently_disabled_constructs() {
     options.constructs.strikethrough = false;
     let normalized = normalize_document_with_options("~~ordinary~~\n", &options).unwrap();
     assert_eq!(
-        core_markdown::to_html_with_options(
+        base_markdown::to_html_with_options(
             &normalized,
-            &core_markdown::Options {
+            &base_markdown::Options {
                 parse: options,
-                ..core_markdown::Options::default()
+                ..base_markdown::Options::default()
             }
         ),
         "<p>~~ordinary~~</p>\n"

@@ -7,7 +7,7 @@
 //! serializes the result with soft source line breaks unwrapped. CommonMark
 //! includes inline code. The `markdown:normalize` Bake task applies this to
 //! one or more files.
-use core_markdown::{
+use base_markdown::{
     Document, LineWrapping, MarkdownOptions, ParseOptions, message::Message,
     to_markdown_with_options,
 };
