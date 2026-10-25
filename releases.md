@@ -1,5 +1,9 @@
 # Releases
 
+## v0.5.0
+
+- Migrate to the source-backed `core-markdown` document AST, preserving supported Markdown behavior and source bytes. This changes the public parser option and diagnostic types to `core-markdown` 0.2; callers using explicit options must update their dependency too.
+
 ## v0.4.0
 
 - Use `core-markdown` in place of `socketry-markdown`. Parser options and errors in the public API now use `core_markdown` types.

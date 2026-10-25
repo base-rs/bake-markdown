@@ -89,10 +89,18 @@ fn preserves_gfm_tables_and_normalizes_task_list_markers() {
 }
 
 #[test]
-fn reports_errors_from_explicit_mdx_parsing() {
-    let options = ParseOptions::mdx();
-
-    let error = normalize_document_with_options("<Open></Different>", &options).unwrap_err();
-
-    assert!(error.to_string().contains("Unexpected closing tag"));
+fn honors_independently_disabled_constructs() {
+    let mut options = ParseOptions::gfm();
+    options.constructs.strikethrough = false;
+    let normalized = normalize_document_with_options("~~ordinary~~\n", &options).unwrap();
+    assert_eq!(
+        core_markdown::to_html_with_options(
+            &normalized,
+            &core_markdown::Options {
+                parse: options,
+                ..core_markdown::Options::default()
+            }
+        ),
+        "<p>~~ordinary~~</p>\n"
+    );
 }
