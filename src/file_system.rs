@@ -7,7 +7,7 @@ use std::{
 };
 
 use bake::{Error, Result};
-use core_markdown::message::Message;
+use base_markdown::message::Message;
 
 trait FileSystem {
     fn read_to_string(&mut self, path: &Path) -> io::Result<String>;
