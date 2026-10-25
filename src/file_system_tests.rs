@@ -156,25 +156,31 @@ fn returns_a_contextual_error_when_a_file_cannot_be_written() {
 }
 
 #[test]
-fn returns_a_contextual_error_when_markdown_cannot_be_parsed() {
+fn returns_a_contextual_error_when_markdown_cannot_be_serialized() {
     let mut file_system = MemoryFileSystem::default();
     file_system.files.insert(
-        PathBuf::from("project/document.mdx"),
+        PathBuf::from("project/document.md"),
         "<Open></Different>".to_owned(),
     );
-    let options = core_markdown::ParseOptions::mdx();
 
     let error = normalize_files_with(
         &mut file_system,
         Path::new("project"),
-        &[PathBuf::from("document.mdx")],
-        |source| crate::normalize_document_with_options(source, &options),
+        &[PathBuf::from("document.md")],
+        |_| {
+            Err(core_markdown::message::Message {
+                reason: "cannot serialize".into(),
+                rule_id: "test-error",
+                source: "bake-markdown",
+                span: None,
+            })
+        },
     )
     .unwrap_err();
 
     assert!(
         error
             .to_string()
-            .contains("failed to normalize project/document.mdx:")
+            .contains("failed to normalize project/document.md:")
     );
 }

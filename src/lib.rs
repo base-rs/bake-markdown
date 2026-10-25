@@ -8,8 +8,8 @@
 //! includes inline code. The `markdown:normalize` Bake task applies this to
 //! one or more files.
 use core_markdown::{
-    LineWrapping, MarkdownOptions, ParseOptions, message::Message, to_markdown_with_options,
-    to_mdast,
+    Document, LineWrapping, MarkdownOptions, ParseOptions, message::Message,
+    to_markdown_with_options,
 };
 
 /// Normalize a Markdown document by joining soft source line breaks.
@@ -22,7 +22,7 @@ use core_markdown::{
 ///
 /// # Errors
 ///
-/// Returns an error if the Markdown syntax tree cannot be parsed or serialized.
+/// Returns an error if the document cannot be serialized.
 pub fn normalize_document(source: &str) -> Result<String, Message> {
     let mut options = ParseOptions::gfm();
     options.constructs.frontmatter = true;
@@ -35,16 +35,17 @@ pub fn normalize_document(source: &str) -> Result<String, Message> {
 /// Normalize a Markdown document using explicit parser options.
 ///
 /// Use this for syntax beyond the default GitHub Flavored Markdown, front
-/// matter, and math support, such as MDX.
+/// matter, and math support, or to disable individual constructs.
 ///
 /// # Errors
 ///
-/// Returns an error if the Markdown syntax tree cannot be parsed or serialized.
+/// Returns an error if the document cannot be serialized.
 pub fn normalize_document_with_options(
     source: &str,
     parse_options: &ParseOptions,
 ) -> Result<String, Message> {
-    let tree = to_mdast(source, parse_options)?;
+    let tree = Document::parse(source, parse_options)
+        .expect("the built-in Markdown parser produces a valid document");
 
     to_markdown_with_options(
         &tree,
