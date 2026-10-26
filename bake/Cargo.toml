@@ -7,4 +7,4 @@ publish = false
 [dependencies]
 bake = "0.20"
 bake-markdown = { path = ".." }
-core-project = ">=0.1.0"
+base-project = ">=0.1.0"
