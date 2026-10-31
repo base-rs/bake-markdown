@@ -6,10 +6,11 @@
 //! [`normalize_document`] parses CommonMark, GFM, front matter, and math, then
 //! serializes the result with soft source line breaks unwrapped. CommonMark
 //! includes inline code. The `markdown:normalize` Bake task applies this to
-//! one or more files.
+//! one or more files. Normalization is implemented by
+//! [`base_markdown::normalize_markdown`], so other tools can produce the same
+//! output without depending on these tasks.
 use base_markdown::{
-    Document, LineWrapping, MarkdownOptions, ParseOptions, message::Message,
-    to_markdown_with_options,
+    ParseOptions, message::Message, normalize_markdown, normalize_markdown_with_options,
 };
 
 /// Normalize a Markdown document by joining soft source line breaks.
@@ -24,12 +25,7 @@ use base_markdown::{
 ///
 /// Returns an error if the document cannot be serialized.
 pub fn normalize_document(source: &str) -> Result<String, Message> {
-    let mut options = ParseOptions::gfm();
-    options.constructs.frontmatter = true;
-    options.constructs.math_flow = true;
-    options.constructs.math_text = true;
-
-    normalize_document_with_options(source, &options)
+    normalize_markdown(source)
 }
 
 /// Normalize a Markdown document using explicit parser options.
@@ -44,16 +40,7 @@ pub fn normalize_document_with_options(
     source: &str,
     parse_options: &ParseOptions,
 ) -> Result<String, Message> {
-    let tree = Document::parse(source, parse_options)
-        .expect("the built-in Markdown parser produces a valid document");
-
-    to_markdown_with_options(
-        &tree,
-        &MarkdownOptions {
-            line_wrapping: LineWrapping::Unwrap,
-            ..MarkdownOptions::default()
-        },
-    )
+    normalize_markdown_with_options(source, parse_options)
 }
 
 mod file_system;

@@ -1,5 +1,9 @@
 # Releases
 
+## Unreleased
+
+- Normalize through `base_markdown::normalize_markdown`, which now owns the normalization rules, so `markdown:normalize` and other tools built on `base-markdown`, such as `bake-readme`, write identical Markdown. Requires `base-markdown` 0.1.3.
+
 ## v0.6.0
 
 - Depend on `base-markdown` under the `base-rs` organization, replacing `core-markdown`. Callers passing explicit `ParseOptions` or naming parser errors must use the corresponding types from `base-markdown`.
