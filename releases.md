@@ -1,6 +1,6 @@
 # Releases
 
-## Unreleased
+## v0.6.1
 
 - Normalize through `base_markdown::normalize_markdown`, which now owns the normalization rules, so `markdown:normalize` and other tools built on `base-markdown`, such as `bake-readme`, write identical Markdown. Requires `base-markdown` 0.1.3.
 - Raise the minimum supported Rust version in `rust-version` from 1.85 to 1.88, as the let-chains in `bake-macros` 0.20 already require.

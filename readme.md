@@ -34,6 +34,11 @@ Prepare a release with `cargo bake cargo:release:patch` (or `minor`, `major`, or
 
 See [releases.md](releases.md) for the full release history.
 
+### v0.6.1
+
+- Normalize through `base_markdown::normalize_markdown`, which now owns the normalization rules, so `markdown:normalize` and other tools built on `base-markdown`, such as `bake-readme`, write identical Markdown. Requires `base-markdown` 0.1.3.
+- Raise the minimum supported Rust version in `rust-version` from 1.85 to 1.88, as the let-chains in `bake-macros` 0.20 already require.
+
 ### v0.6.0
 
 - Depend on `base-markdown` under the `base-rs` organization, replacing `core-markdown`. Callers passing explicit `ParseOptions` or naming parser errors must use the corresponding types from `base-markdown`.
@@ -41,10 +46,6 @@ See [releases.md](releases.md) for the full release history.
 ### v0.5.0
 
 - Migrate to the source-backed `core-markdown` document AST, preserving supported Markdown behavior and source bytes. This changes the public parser option and diagnostic types to `core-markdown` 0.2; callers using explicit options must update their dependency too.
-
-### v0.4.0
-
-- Use `core-markdown` in place of `socketry-markdown`. Parser options and errors in the public API now use `core_markdown` types.
 
 <!-- bake-readme:releases:end -->
 
