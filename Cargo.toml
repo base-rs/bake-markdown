@@ -2,7 +2,7 @@
 name = "bake-markdown"
 version = "0.6.0"
 edition = "2024"
-rust-version = "1.85"
+rust-version = "1.88"
 license = "MIT"
 repository = "https://github.com/base-rs/bake-markdown"
 description = "Markdown normalization tasks for Bake"
