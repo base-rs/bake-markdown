@@ -34,6 +34,10 @@ Prepare a release with `cargo bake cargo:release:patch` (or `minor`, `major`, or
 
 See [releases.md](releases.md) for the full release history.
 
+### v0.6.2
+
+- Require `bake` 0.20 or later, instead of 0.19 or later, so that Cargo resolves this crate to the same `bake` as a task package that requires `bake` 0.20.2. In a workspace whose `rust-version` is below the 1.88 that `bake` 0.20.2 declares, Cargo resolved the old requirement to `bake` 0.19.2, which declares none, and the task package failed to compile against two `bake` versions.
+
 ### v0.6.1
 
 - Normalize through `base_markdown::normalize_markdown`, which now owns the normalization rules, so `markdown:normalize` and other tools built on `base-markdown`, such as `bake-readme`, write identical Markdown. Requires `base-markdown` 0.1.3.
@@ -42,10 +46,6 @@ See [releases.md](releases.md) for the full release history.
 ### v0.6.0
 
 - Depend on `base-markdown` under the `base-rs` organization, replacing `core-markdown`. Callers passing explicit `ParseOptions` or naming parser errors must use the corresponding types from `base-markdown`.
-
-### v0.5.0
-
-- Migrate to the source-backed `core-markdown` document AST, preserving supported Markdown behavior and source bytes. This changes the public parser option and diagnostic types to `core-markdown` 0.2; callers using explicit options must update their dependency too.
 
 <!-- bake-readme:releases:end -->
 
